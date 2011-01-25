@@ -8,4 +8,5 @@ Thick.Views.Login.prototype.render = function() {
 }
 Thick.Views.Login.prototype.teardown = function() {
 	console.log("Views: Login: teardown");
+
 }

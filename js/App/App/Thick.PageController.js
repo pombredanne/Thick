@@ -7,9 +7,8 @@ Thick.PageController = function() {
 			view: new Thick.Views.LoggedOut(),
 			active: false,
 			parentViewId: null,
-			childViews: []
+			childViews: [{container: "#something"}]
 		},
-	
 		"loggedIn": {
 			id:"loggedIn",
 			view: new Thick.Views.LoggedIn(),
@@ -62,6 +61,12 @@ function contains(a, e) {
 }
 
 Thick.PageController.prototype.render = function(options) {
+  if(this.views[options.parentViewId].active) {
+    alert(options.parentViewId+" already rendered");
+    
+  }
+  
+  
 	this.getActiveNonAttachedParents(this.views[options.parentViewId].parentViewId);
 	this.getActiveChildrenViews(this.views[options.parentViewId].parentViewId);
 	this.activeChildren = this.activeChildren.reverse();
