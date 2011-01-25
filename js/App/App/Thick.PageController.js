@@ -62,13 +62,12 @@ function contains(a, e) {
 
 Thick.PageController.prototype.render = function(options) {
 
-  
-  
 	this.getActiveNonAttachedParents(this.views[options.parentViewId].parentViewId);
 	this.getActiveChildrenViews(this.views[options.parentViewId].parentViewId);
 	this.activeChildren = this.activeChildren.reverse();
 	this.activeChildren = uniqueArr(this.activeChildren); // hack because i cant check logic with my brain
 	
+	// if the activeChildren contains a parentView that we are trying to render, then remove from active children
 	if(this.views[options.parentViewId].active) {
 		for(var z = 0; z < this.activeChildren.length; z++) {
 			if(this.activeChildren[z] === this.views[options.parentViewId]) {
@@ -109,6 +108,7 @@ Thick.PageController.prototype.render = function(options) {
 	// final easy bit
 	this.addDumbViewToParentViewChildViews(options.parentViewId, options.view);
 	this.renderDumbView(options.view);
+	
 }
 
 Thick.PageController.prototype.teardownSpecificChildView = function(parentViewId) {

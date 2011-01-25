@@ -10,6 +10,7 @@ Thick.App = new (function() {
 		app.tyro.addController(Thick.Controllers.Login);
 		app.tyro.addController(Thick.Controllers.DashboardHome);
 		app.tyro.addController(Thick.Controllers.SetupHome);
+		app.tyro.addController(Thick.Controllers.SetupNavigation);
 		app.tyro.addController(Thick.Controllers.CampaignsHome);
 		app.tyro.run();
 	});
