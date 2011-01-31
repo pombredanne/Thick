@@ -5,35 +5,35 @@ Thick.PageController = function() {
 			id:"loggedOut",
 			view: new Thick.Views.LoggedOut(),
 			active: false,
-			parentViewId: null,
+			partialViewId: null,
 			childViews: []
 		},
 		"loggedIn": {
 			id:"loggedIn",
 			view: new Thick.Views.LoggedIn(),
 			active: false,
-			parentViewId: null,
+			partialViewId: null,
 			childViews: []
 		},
 		"dashboard": {
 			id:"dashboard",
 			view: new Thick.Views.Dashboard(),
 			active: false,
-			parentViewId: "loggedIn",
+			partialViewId: "loggedIn",
 			childViews: []
 		},
 		"setup": {
 			id: "setup",
 			view: new Thick.Views.Setup(),
 			active: false,
-			parentViewId: "loggedIn",
+			partialViewId: "loggedIn",
 			childViews: []
 		},
 		"campaigns": {
 			id: "campaigns",
 			view: new Thick.Views.Campaigns(),
 			active: false,
-			parentViewId: "setup",
+			partialViewId: "setup",
 			childViews: []
 		}
 	}
@@ -75,16 +75,18 @@ Thick.PageController.prototype.render = function(options) {
     // we then have to render all parents partial views (in order)
     // then render the view itself
   else {    
+    this.teardownNonAttachedPartialViews(options.partialViewId);
     this.teardownChildPartialViews(options.partialViewId); // children
     this.renderParentPartialViews(options.partialViewId);
-    //this.renderView(options.partialViewId, options.view);
+    this.renderView(options.partialViewId, options.view);
   }
 }
 
 Thick.PageController.prototype.renderParentPartialViews = function(partialViewId) {
   console.log("renderParentPartialViews");
   var inActiveParents = this.getInActiveParentViews(partialViewId).reverse();
-  	for(var i = 0; i < inActiveParents.length; i++) {
+  console.log(inActiveParents);
+  for(var i = 0; i < inActiveParents.length; i++) {
 		inActiveParents[i].view.render();
 		inActiveParents[i].active = true;
 	}
@@ -94,7 +96,11 @@ Thick.PageController.prototype.teardownChildPartialViews = function(partialViewI
   console.log("teardownChildPartialViews");
   this.getActiveChildrenViews(partialViewId);
   console.log(this.activeChildren);  
-	for(var j = 0; j < this.activeChildren.length; j++) {
+	this.teardownChildren();
+}
+
+Thick.PageController.prototype.teardownChildren = function() {
+  for(var j = 0; j < this.activeChildren.length; j++) {
 		var child = this.activeChildren[j];
 		for(var k = 0; k < child.childViews.length; k++) {
 
@@ -108,6 +114,11 @@ Thick.PageController.prototype.teardownChildPartialViews = function(partialViewI
 		child.active = false;
 	}
 	this.activeChildren = [];
+}
+
+Thick.PageController.prototype.teardownNonAttachedPartialViews = function(partialViewId) {
+  this.getActiveNonAttachedParents(partialViewId);
+  this.teardownChildren();  
 }
 
 Thick.PageController.prototype.renderView = function(partialViewId, view) {
