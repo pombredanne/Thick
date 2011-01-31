@@ -83,13 +83,22 @@ Thick.PageController.prototype.render = function(options) {
     console.log("2.1. ensure that the partialView dom node container is not taking the place of any parent partial view child views");
     var partialViewContainer = this.getPartialViewDomContainer(options.partialViewId);
     var partialViewParentsChildren = this.getPartialViewParentsChildren(options.partialViewId);
+    for(var i = 0; i < partialViewParentsChildren.length; i++) {
+      if(partialViewParentsChildren[i].container === partialViewContainer) {
+        partialViewParentsChildren[i].teardown();
+        partialViewParentsChildren.splice(i, 1);
+  			i--;
+        break;
+      }
+    }
+    
     console.log("2.2. now check to see if any views on the parent partial view have the same container and teardown");
     
     
     
     console.log("3. render parents");
     this.renderParentPartialViews(options.partialViewId);
-    console.log("4. render the view");
+    console.log("4. render the view"); // 5. also need to make sure that the view we are about to render is not taking the place of anything....
     this.renderView(options.partialViewId, options.view);
   }
 }
@@ -99,7 +108,9 @@ Thick.PageController.prototype.getPartialViewDomContainer = function(partialView
 }
 
 Thick.PageController.prototype.getPartialViewParentsChildren = function(partialViewId) {
-  // grab the parent partial view of the one we are going to show and return the childViews array (for looping thru)
+  var pv = this.partialViews[partialViewId];
+  pv = this.partialViews[pv.partialViewId];
+  return pv.childViews;
 }
 
 Thick.PageController.prototype.teardownNonAttachedPartialViews = function(partialViewId) {
