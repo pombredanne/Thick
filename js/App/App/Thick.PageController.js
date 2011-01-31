@@ -75,11 +75,21 @@ Thick.PageController.prototype.render = function(options) {
     // we then have to render all parents partial views (in order)
     // then render the view itself
   else {    
+    console.log("1. teardown non attached parents");
     this.teardownNonAttachedPartialViews(options.partialViewId);
+    console.log("2. teardown children");
     this.teardownChildPartialViews(options.partialViewId); // children
+    console.log("3. render parents");
     this.renderParentPartialViews(options.partialViewId);
+    console.log("4. render the view");
     this.renderView(options.partialViewId, options.view);
   }
+}
+
+Thick.PageController.prototype.teardownNonAttachedPartialViews = function(partialViewId) {
+  this.getActiveNonAttachedParents(partialViewId);
+  this.activeChildren.reverse();
+  this.teardownChildren();
 }
 
 Thick.PageController.prototype.renderParentPartialViews = function(partialViewId) {
@@ -93,9 +103,7 @@ Thick.PageController.prototype.renderParentPartialViews = function(partialViewId
 }
 
 Thick.PageController.prototype.teardownChildPartialViews = function(partialViewId) {
-  console.log("teardownChildPartialViews");
   this.getActiveChildrenViews(partialViewId);
-  console.log(this.activeChildren);  
 	this.teardownChildren();
 }
 
@@ -103,7 +111,6 @@ Thick.PageController.prototype.teardownChildren = function() {
   for(var j = 0; j < this.activeChildren.length; j++) {
 		var child = this.activeChildren[j];
 		for(var k = 0; k < child.childViews.length; k++) {
-
 			child.childViews[k].teardown();
 
 			// we need to remove this
@@ -116,10 +123,6 @@ Thick.PageController.prototype.teardownChildren = function() {
 	this.activeChildren = [];
 }
 
-Thick.PageController.prototype.teardownNonAttachedPartialViews = function(partialViewId) {
-  this.getActiveNonAttachedParents(partialViewId);
-  this.teardownChildren();  
-}
 
 Thick.PageController.prototype.renderView = function(partialViewId, view) {
   this.partialViews[partialViewId].childViews.push(view);
