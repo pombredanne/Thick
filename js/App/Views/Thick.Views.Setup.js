@@ -5,7 +5,7 @@ Thick.Views.Setup = function() {
 }
 Thick.Views.Setup.prototype.render = function() {
 	console.log("Views: Setup: render");
-	//$.publish("Setup.View.Rendered");
+	$.publish("setupRendered")
 }
 Thick.Views.Setup.prototype.teardown = function() {
 	console.log("Views: Setup: teardown");
