@@ -93,9 +93,7 @@ Thick.PageController.prototype.teardownNonAttachedPartialViews = function(partia
 }
 
 Thick.PageController.prototype.renderParentPartialViews = function(partialViewId) {
-  console.log("renderParentPartialViews");
   var inActiveParents = this.getInActiveParentViews(partialViewId).reverse();
-  console.log(inActiveParents);
   for(var i = 0; i < inActiveParents.length; i++) {
 		inActiveParents[i].view.render();
 		inActiveParents[i].active = true;
