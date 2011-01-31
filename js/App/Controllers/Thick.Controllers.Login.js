@@ -5,5 +5,5 @@ Thick.Controllers.Login = function() {
 	Thick.App.tyro.addRoute("/login/", $.proxy(this.renderDashboard, this));
 }
 Thick.Controllers.Login.prototype.renderDashboard = function() {
-	Thick.App.pageController.render({ parentViewId: "loggedOut", view: this.view });
+	Thick.App.pageController.render({ partialViewId: "loggedOut", view: this.view });
 }

@@ -5,5 +5,5 @@ Thick.Controllers.DashboardHome = function() {
 	Thick.App.tyro.addRoute("/dashboard/", $.proxy(this.renderDashboard, this));
 }
 Thick.Controllers.DashboardHome.prototype.renderDashboard = function() {
-	Thick.App.pageController.render({ parentViewId: "dashboard", view: this.view });
+	Thick.App.pageController.render({ partialViewId: "dashboard", view: this.view });
 }

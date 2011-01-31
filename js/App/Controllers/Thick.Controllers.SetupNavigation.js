@@ -5,5 +5,5 @@ Thick.Controllers.SetupNavigation = function() {
 	//Thick.App.tyro.addRoute("/setup/", $.proxy(this.renderNav, this));
 }
 Thick.Controllers.SetupNavigation.prototype.renderNav = function() {
-	Thick.App.pageController.render({ parentViewId: "setup", view: this.view });
+	Thick.App.pageController.render({ partialViewId: "setup", view: this.view });
 }
