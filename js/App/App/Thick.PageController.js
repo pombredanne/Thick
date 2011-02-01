@@ -128,7 +128,17 @@ Thick.PageController.prototype.teardownChildren = function() {
 }
 
 Thick.PageController.prototype.renderView = function(partialViewId, view) {
-  this.partialViews[partialViewId].childViews.push(view);
+  var childViews = this.partialViews[partialViewId].childViews;
+  for(var i = 0; i < childViews.length; i++) {
+    if(childViews[i].container === view.container) {
+      childViews[i].teardown();
+			childViews.splice(i, 1);
+			i--;
+			break;
+    }
+  }
+  
+  childViews.push(view);
   this.partialViews[partialViewId].active = true;
   view.render();
 }
