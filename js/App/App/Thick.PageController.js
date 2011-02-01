@@ -39,14 +39,16 @@ Thick.PageController = function() {
 	}
 	
 	this.activeChildren = [];	
+	this.dfd = null;
+	
 }
 
 Thick.PageController.prototype.render = function(options) {
   console.log("PAGECONTROLLER > RENDER");
 
   if(options.special && this.partialViews[options.partialViewId].active) {
-	this.renderView(options.partialViewId, options.view);
-	return;
+	  this.renderView(options.partialViewId, options.view);
+	  return;
   }
 
   if(this.partialViews[options.partialViewId].active) {
@@ -74,6 +76,80 @@ Thick.PageController.prototype.render = function(options) {
     console.log("5. render the view"); // 5. also need to make sure that the view we are about to render is not taking the place of anything....
     this.renderView(options.partialViewId, options.view);
   }
+  
+  this.go();
+  
+}
+/*
+function renderWhatever() {
+  var dfd = $.Deferred();
+  dfd.done = function() {
+    console.log('rendered 1');
+  }
+  this.getTemplate(function() {
+    dfd.resolve()
+  });
+  return dfd.promise();
+}
+
+function renderWhatever2() {
+  var dfd = $.Deferred();  
+  this.getTemplate(function() {
+    dfd.resolve()
+  });
+  return dfd.promise();
+}
+*/
+
+Thick.PageController.prototype.renderParentPartialViews = function(partialViewId) {
+  var inActiveParents = this.getInActiveParentViews(partialViewId).reverse();
+
+  for(var i = 0; i < inActiveParents.length; i++) {
+		inActiveParents[i].active = true;
+		//inActiveParents[i].view.render();	// push this method to an array	
+		
+		var dfd = inActiveParents[i].view.render();
+		this.addToDfd(dfd);
+	}
+}
+
+Thick.PageController.prototype.addToDfd = function(dfd) {
+  
+  if(this.dfd) {
+	  this.dfd = this.dfd.then(dfd);
+  } else {
+    this.dfd = $.when(dfd);
+  }
+}
+
+Thick.PageController.prototype.renderView = function(partialViewId, view) {
+  var childViews = this.partialViews[partialViewId].childViews;
+  for(var i = 0; i < childViews.length; i++) {
+    if(childViews[i].container === view.container) {
+      childViews[i].teardown();
+			childViews.splice(i, 1);
+			i--;
+			break;
+    }
+  }
+  
+  childViews.push(view);
+  this.partialViews[partialViewId].active = true;
+  //view.render(); // push this method to an array
+
+  
+  var dfd = view.render();
+	this.addToDfd(dfd);
+  
+}
+
+
+Thick.PageController.prototype.go = function(funcs) {
+  var me = this;
+  
+  $.when.apply(this, this.goDeferredArray).then(function() {
+    me.goDeferredArray = [];
+  })
 }
 
 Thick.PageController.prototype.getPartialViewDomContainer = function(partialViewId) {
@@ -98,13 +174,7 @@ Thick.PageController.prototype.teardownNonAttachedPartialViews = function(partia
   this.teardownChildren();
 }
 
-Thick.PageController.prototype.renderParentPartialViews = function(partialViewId) {
-  var inActiveParents = this.getInActiveParentViews(partialViewId).reverse();
-  for(var i = 0; i < inActiveParents.length; i++) {
-		inActiveParents[i].active = true;
-		inActiveParents[i].view.render();		
-	}
-}
+
 
 Thick.PageController.prototype.teardownChildPartialViews = function(partialViewId) {
 	this.getActiveChildrenViews(partialViewId);
@@ -127,21 +197,6 @@ Thick.PageController.prototype.teardownChildren = function() {
 	this.activeChildren = [];
 }
 
-Thick.PageController.prototype.renderView = function(partialViewId, view) {
-  var childViews = this.partialViews[partialViewId].childViews;
-  for(var i = 0; i < childViews.length; i++) {
-    if(childViews[i].container === view.container) {
-      childViews[i].teardown();
-			childViews.splice(i, 1);
-			i--;
-			break;
-    }
-  }
-  
-  childViews.push(view);
-  this.partialViews[partialViewId].active = true;
-  view.render();
-}
 
 
 Thick.PageController.prototype.getActiveChildrenViews = function(partialViewId) {

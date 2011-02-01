@@ -6,6 +6,7 @@ Thick.App = new (function() {
 	app.tyro = new Tyro();
 	
 	$(document).ready(function() {
+  
 		app.pageController = new Thick.PageController();
 		app.tyro.addController(Thick.Controllers.Login);
 		app.tyro.addController(Thick.Controllers.DashboardHome);

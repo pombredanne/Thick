@@ -1,0 +1,5 @@
+<script id="tmplSetupHome" type="text/x-jquery-tmpl">
+    <div id="setupHome">
+		This is setupHome
+    </div>
+</script>
