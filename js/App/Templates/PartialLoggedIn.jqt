@@ -1,0 +1,8 @@
+<script id="tmplPartialLoggedIn" type="text/x-jquery-tmpl">
+    <div id="partialLoggedIn">
+    	<header>This is the header</header>
+		<nav>Primary nav here</nav>
+		<div id="main">Main here</div>
+		<footer>This is the footer</footer>
+    </div>
+</script>

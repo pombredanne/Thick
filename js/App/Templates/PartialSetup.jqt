@@ -1,0 +1,6 @@
+<script id="tmplPartialSetup" type="text/x-jquery-tmpl">
+    <div id="partialSetup">
+		<nav>Setup nav here</nav>
+		<div id="setupMain">Setup Main here</div>
+    </div>
+</script>
