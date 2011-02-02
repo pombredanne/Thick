@@ -77,7 +77,7 @@ Thick.PageController.prototype.render = function(options) {
     this.renderView(options.partialViewId, options.view);
   }
   
-  this.go();
+  //this.go();
   
 }
 /*
@@ -135,11 +135,10 @@ Thick.PageController.prototype.renderView = function(partialViewId, view) {
   
   childViews.push(view);
   this.partialViews[partialViewId].active = true;
-  //view.render(); // push this method to an array
+  view.render(); // push this method to an array
 
-  
-  var dfd = view.render();
-	this.addToDfd(dfd);
+  //var dfd = view.render();
+	//this.addToDfd(dfd);
   
 }
 

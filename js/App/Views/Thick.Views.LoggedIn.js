@@ -8,15 +8,9 @@ Thick.Views.LoggedIn = function() {
 $.extend(Thick.Views.LoggedIn.prototype, new Thick.Views.Base());
 
 Thick.Views.LoggedIn.prototype.render = function() {  
-  var dfd = $.Deferred();
-  
-  dfd.done(function() {
-    console.log(arguments);
+  this.getTemplate("js/App/Templates/PartialLoggedIn.jqt", "#tmplPartialLoggedIn", function(tmpl) {
+    $(this.container).html(tmpl.html())
   });
-    
-  this.getTemplate("js/App/Templates/PartialLoggedIn.jqt", "#tmplPartialLoggedIn", dfd.resolve);  
-  
-  return dfd.promise();
 }
 
 Thick.Views.LoggedIn.prototype.teardown = function() {

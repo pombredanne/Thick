@@ -8,16 +8,12 @@ Thick.Views.SetupHome = function() {
 $.extend(Thick.Views.SetupHome.prototype, new Thick.Views.Base())
 
 Thick.Views.SetupHome.prototype.render = function() {
-  var dfd = $.Deferred();
-  dfd.done(function() {
-    console.log(arguments);
+  this.getTemplate("js/App/Templates/SetupHome.jqt", "#tmplSetupHome", function(tmpl) {
+    $(this.container).html(tmpl.html())
   });
-
   
-  this.getTemplate("js/App/Templates/SetupHome.jqt", "#tmplSetupHome", dfd.resolve);  
-  return dfd.promise();		
 }
 
 Thick.Views.SetupHome.prototype.teardown = function() {
-	console.log("Views: SetupHome: teardown");
+	$(this.container).empty();
 }
