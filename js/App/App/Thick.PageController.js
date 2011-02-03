@@ -88,8 +88,7 @@ Thick.PageController.prototype.getPartialViewParentsChildren = function(partialV
   }
   else {
 	return pv.childViews;
-  }
-  
+  }  
 }
 
 Thick.PageController.prototype.teardownNonAttachedPartialViews = function(partialViewId) {
@@ -107,7 +106,8 @@ Thick.PageController.prototype.renderParentPartialViews = function(partialViewId
 }
 
 Thick.PageController.prototype.teardownChildPartialViews = function(partialViewId) {
-	this.getActiveChildrenViews(partialViewId);
+	//this.getActiveChildrenViews(partialViewId);
+	this.activeChildren = this.getActiveChildrenViewsNew(partialViewId);
 	this.teardownChildren();
 }
 
@@ -158,6 +158,24 @@ Thick.PageController.prototype.getActiveChildrenViews = function(partialViewId) 
 	if(viewId) {
 		this.getActiveChildrenViews(viewId);
 	}
+}
+
+Thick.PageController.prototype.getActiveChildrenViewsNew = function(partialViewId) {
+	var viewId = null;
+	var arr = [];
+	for(var view in this.partialViews) {
+		if(this.partialViews[view].active) {
+			if(partialViewId == this.partialViews[view].partialViewId) {
+				viewId = view;
+				arr.push(this.partialViews[view]);
+				break;
+			}
+		}
+	}
+	if(viewId) {
+		arr.concat(this.getActiveChildrenViews(viewId));
+	}
+	return arr;
 }
 
 

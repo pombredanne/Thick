@@ -9,7 +9,8 @@ $.extend(Thick.Views.LoggedIn.prototype, new Thick.Views.Base());
 
 Thick.Views.LoggedIn.prototype.render = function() {  
   this.getTemplate("js/App/Templates/PartialLoggedIn.jqt", "#tmplPartialLoggedIn", function(tmpl) {
-    $(this.container).html(tmpl.html())
+    $(this.container).html(tmpl.html());
+	console.log("Views: LoggedIn: render");
   });
 }
 

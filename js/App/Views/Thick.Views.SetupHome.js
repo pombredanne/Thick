@@ -9,7 +9,8 @@ $.extend(Thick.Views.SetupHome.prototype, new Thick.Views.Base())
 
 Thick.Views.SetupHome.prototype.render = function() {
   this.getTemplate("js/App/Templates/SetupHome.jqt", "#tmplSetupHome", function(tmpl) {
-    $(this.container).html(tmpl.html())
+    $(this.container).html(tmpl.html());
+	console.log("Views: SetupHome: render");
   });
   
 }
