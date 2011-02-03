@@ -58,7 +58,7 @@ Thick.PageController.prototype.render = function(options) {
     this.teardownNonAttachedPartialViews(options.partialViewId);
     console.log("2. teardown children");
     this.teardownChildPartialViews(options.partialViewId); // children    
-    console.log("3. ensure that the partialView dom node container is not taking the place of any parent partial view child views, teardown if nec");
+    //console.log("3. ensure that the partialView dom node container is not taking the place of any parent partial view child views, teardown if nec");
     var partialViewContainer = this.getPartialViewDomContainer(options.partialViewId);
     var partialViewParentsChildren = this.getPartialViewParentsChildren(options.partialViewId);
     for(var i = 0; i < partialViewParentsChildren.length; i++) {
@@ -69,9 +69,9 @@ Thick.PageController.prototype.render = function(options) {
         break;
       }
     }    
-    console.log("4. render parents");
+    //console.log("4. render parents");
     this.renderParentPartialViews(options.partialViewId);
-    console.log("5. render the view"); // 5. also need to make sure that the view we are about to render is not taking the place of anything....
+    //console.log("5. render the view"); // 5. also need to make sure that the view we are about to render is not taking the place of anything....
     this.renderView(options.partialViewId, options.view);
   }
 }
@@ -94,7 +94,9 @@ Thick.PageController.prototype.getPartialViewParentsChildren = function(partialV
 Thick.PageController.prototype.teardownNonAttachedPartialViews = function(partialViewId) {
   this.getActiveNonAttachedParents(partialViewId);
   this.activeChildren.reverse();
-  this.teardownChildren();
+  if(this.activeChildren.length) {
+	this.teardownChildren();
+  }
 }
 
 Thick.PageController.prototype.renderParentPartialViews = function(partialViewId) {
@@ -106,8 +108,7 @@ Thick.PageController.prototype.renderParentPartialViews = function(partialViewId
 }
 
 Thick.PageController.prototype.teardownChildPartialViews = function(partialViewId) {
-	//this.getActiveChildrenViews(partialViewId);
-	this.activeChildren = this.getActiveChildrenViewsNew(partialViewId);
+	this.getActiveChildrenViews(partialViewId);
 	this.teardownChildren();
 }
 

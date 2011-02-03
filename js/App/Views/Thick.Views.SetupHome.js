@@ -17,4 +17,5 @@ Thick.Views.SetupHome.prototype.render = function() {
 
 Thick.Views.SetupHome.prototype.teardown = function() {
 	$(this.container).empty();
+	console.log("Views: SetupHome: teardown");
 }

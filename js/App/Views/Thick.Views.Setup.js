@@ -10,6 +10,7 @@ Thick.Views.Setup.prototype.render = function() {
   this.getTemplate("js/App/Templates/PartialSetup.jqt", "#tmplPartialSetup", function(tmpl) {
     $(this.container).html(tmpl.html())
 	console.log("Views: Setup: render");
+	$.publish("setupRendered");
   });  
 }
 Thick.Views.Setup.prototype.teardown = function() {

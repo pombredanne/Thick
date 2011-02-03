@@ -3,11 +3,11 @@ Thick.App = new (function() {
 	
 	var app = {};
 	
-	app.tyro = new Tyro();
+	app.tyro = new Tyro.Routes();
 	
 	$(document).ready(function() {
   
-		app.pageController = new Thick.PageController();
+		app.pageController = new Tyro.PageController();
 		app.tyro.addController(Thick.Controllers.Login);
 		app.tyro.addController(Thick.Controllers.DashboardHome);
 		app.tyro.addController(Thick.Controllers.SetupHome);
