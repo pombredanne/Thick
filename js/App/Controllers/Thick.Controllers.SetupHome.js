@@ -6,4 +6,7 @@ Thick.Controllers.SetupHome = function() {
 }
 Thick.Controllers.SetupHome.prototype.renderDashboard = function() {
 	Thick.App.pageController.render({ partialViewId: "setup", view: this.view });
+	//this.view.showLoader();
+	// ...
+	//this.view.render();
 }
