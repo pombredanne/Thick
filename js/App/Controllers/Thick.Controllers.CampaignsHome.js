@@ -5,5 +5,7 @@ Thick.Controllers.CampaignsHome = function() {
 	Thick.App.tyro.addRoute("/setup/campaigns/", $.proxy(this.renderCampaigns, this));
 }
 Thick.Controllers.CampaignsHome.prototype.renderCampaigns = function() {
-	Thick.App.pageController.render({ partialViewId: "campaigns", view: this.view });
+	Thick.App.pageController.render("campaigns");
+	Thick.App.pageController.addChildView("campaigns", this.view);
+	this.view.render();
 }

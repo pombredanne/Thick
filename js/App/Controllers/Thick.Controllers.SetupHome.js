@@ -5,8 +5,7 @@ Thick.Controllers.SetupHome = function() {
 	Thick.App.tyro.addRoute("/setup/", $.proxy(this.renderDashboard, this));
 }
 Thick.Controllers.SetupHome.prototype.renderDashboard = function() {
-	Thick.App.pageController.render({ partialViewId: "setup", view: this.view });
-	//this.view.showLoader();
-	// ...
-	//this.view.render();
+	Thick.App.pageController.render("setup");
+	Thick.App.pageController.addChildView("setup", this.view);
+	this.view.render();
 }
