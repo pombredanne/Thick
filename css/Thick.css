@@ -1,0 +1,26 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #eee;
+}
+
+#app {
+  
+}
+
+#partialLoggedIn {
+  background: lightyellow;
+}
+
+#partialLoggedIn header {
+  display: block;
+  background: #ddd;
+}
+
+#partialLoggedIn footer {
+  display: block;
+  background: #ddd;
+}

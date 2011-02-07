@@ -3,7 +3,7 @@
   <head>
     <title>Thick</title>
     
-	<!--<link rel="stylesheet" href="QUnit/QUnit.css" type="text/css" media="screen" />-->
+		<link rel="stylesheet" href="css/Thick.css" type="text/css" media="screen" />
     <script src="js/Vendor/JQuery.js"></script>
 	<script src="js/Vendor/JQuery.PubSub.js"></script>
 	<script src="js/Vendor/JQuery.HashChange.js"></script>
@@ -37,6 +37,10 @@
   <body>
 	<div id="app">
 	</div>
+	<script id="tmplPartialLoggedOut" type="text/x-jquery-tmpl">
+		<div id="partialLoggedOut">
+		</div>
+	</script>
 	<script id="tmplPartialLoggedIn" type="text/x-jquery-tmpl">
 		<div id="partialLoggedIn">
 			<header>This is the header</header>
@@ -45,15 +49,40 @@
 			<footer>This is the footer</footer>
 		</div>
 	</script>
-	  <script id="tmplPartialSetup" type="text/x-jquery-tmpl">
+	<script id="tmplPartialSetup" type="text/x-jquery-tmpl">
 		<div id="partialSetup">
 			<nav>Setup nav here</nav>
-			<div id="setupMain">Setup Main here</div>
+			<div id="setupMain">Setup main here</div>
+		</div>
+	</script>
+	<script id="tmplPartialDashboard" type="text/x-jquery-tmpl">
+		<div id="partialDashboard">
+			<div id="dashboardMain">Dashboard main here</div>
+		</div>
+	</script>
+	<script id="tmplPartialCampaigns" type="text/x-jquery-tmpl">
+		<div id="partialCampaigns">
+			<div id="campaignsMain">Campaigns main here</div>
+		</div>
+	</script>
+	<script id="tmplDashboardHome" type="text/x-jquery-tmpl">
+		<div id="dashboardHome">
+			This is dashboardHome
 		</div>
 	</script>
 	<script id="tmplSetupHome" type="text/x-jquery-tmpl">
 		<div id="setupHome">
 			This is setupHome
+		</div>
+	</script>
+	<script id="tmplCampaignsHome" type="text/x-jquery-tmpl">
+		<div id="campaignsHome">
+			This is campaignsHome
+		</div>
+	</script>
+	<script id="tmplLogin" type="text/x-jquery-tmpl">
+		<div id="login">
+			This is login
 		</div>
 	</script>
   </body>

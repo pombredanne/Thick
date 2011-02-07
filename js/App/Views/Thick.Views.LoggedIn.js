@@ -2,7 +2,6 @@ var Thick = Thick || {};
 Thick.Views = Thick.Views || {};
 Thick.Views.LoggedIn = function() {
 	this.container = "#app";
-	this.dfd = Thick.App.dfd;
 }
 
 $.extend(Thick.Views.LoggedIn.prototype, new Thick.Views.Base());
