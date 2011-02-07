@@ -5,9 +5,6 @@ Thick.Controllers.SetupNavigation = function() {
 	$.subscribe("setupRendered", $.proxy(this.renderNav, this))
 }
 Thick.Controllers.SetupNavigation.prototype.renderNav = function() {
-	//Thick.App.pageController.addChildView("setup", this.view);
-	//this.view.showLoader();
-	//...
-	//this.view.render();
-	
+	Thick.App.pageController.addChildView("setup", this.view);
+	this.view.render();	
 }

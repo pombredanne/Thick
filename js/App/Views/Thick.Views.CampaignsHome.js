@@ -10,11 +10,11 @@ Thick.Views.CampaignsHome.prototype.render = function() {
 		
 	this.getTemplate("js/App/Templates/CampaignsHome.jqt", "#tmplCampaignsHome", function(tmpl) {
     $(this.container).html(tmpl.html())
-		console.log("Views: Dashboard: render");
-		$.publish("dashboardRendered");
+		console.log("Views: CampaignsHome: render");
+		$.publish("campaignsRendered");
   });  	
 		
-	console.log("Views: CampaignsHome: render");
+	
 }
 Thick.Views.CampaignsHome.prototype.teardown = function() {
 	console.log("Views: CampaignsHome: teardown");

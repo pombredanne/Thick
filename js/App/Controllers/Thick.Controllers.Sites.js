@@ -5,5 +5,5 @@ Thick.Controllers.Sites = function() {
   Thick.App.tyro.addRoute("/setup/sites/", $.proxy(this.renderList, this));
 }
 Thick.Controllers.Sites.prototype.renderList = function() {
-	Thick.App.pageController.render({ partialViewId: "setup", view: this.view });
+	//Thick.App.pageController.render({ partialViewId: "setup", view: this.view });
 }
